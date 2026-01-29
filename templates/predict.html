@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Fashion MNIST Predictor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <h2 class="mb-4">Rozpoznawanie odzieży (Simple vs Complex)</h2>
+    
+    <form method="POST" class="row g-3 mb-5">
+        <div class="col-md-3">
+            <input type="number" name="idx1" class="form-control" placeholder="Indeks obrazu 1 (0-9999)" required>
+        </div>
+        <div class="col-md-3">
+            <input type="number" name="idx2" class="form-control" placeholder="Indeks obrazu 2 (0-9999)" required>
+        </div>
+        <div class="col-md-3">
+            <input type="number" name="idx3" class="form-control" placeholder="Indeks obrazu 3 (0-9999)" required>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary w-100">Predict</button>
+        </div>
+    </form>
+
+    {% if results %}
+    <div class="row">
+        {% for res in results %}
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <img src="{{ res.img_path }}" class="card-img-top mx-auto" style="width: 150px;">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Indeks: {{ res.id }}</h5>
+                    <p><strong>Prawdziwa etykieta:</strong> <span class="text-success">{{ res.true_label }}</span></p>
+                    <hr>
+                    
+
+                    <p class="mb-1 text-secondary small">Model Simple:</p>
+                <p class="fw-bold" style="color: {{ 'red' if res.pred_simple != res.true_label else 'black' }}">
+                    {{ res.pred_simple }}
+                </p>
+
+                <p class="mb-1 text-secondary small">Model Complex:</p>
+                <p class="fw-bold" style="color: {{ 'red' if res.pred_complex != res.true_label else 'black' }}">
+                    {{ res.pred_complex }}
+                </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>

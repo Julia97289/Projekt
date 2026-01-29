@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Moja appka!
+        </title>
+    </head>
+    <body>
+        <a href="/history">
+            Zobacz historię operacji
+        </a>
+        
+        <form method="post"> <!-- action -->
+            <input name="number_1" type="number"/>
+            <input name="number_2" type="text"/>
+            
+            <select name="operation">
+                <option value="add"> + </option>
+                <option value="sub"> - </option>
+                <option value="div"> / </option>
+                <option value="mul"> * </option>
+            </select>
+
+            <input type="submit" value="Policz"/>
+        </form>
+
+        {% if result %}
+            <h1> {{ result }} </h1>
+        {% endif %}
+
+    </body> 
+</html>
